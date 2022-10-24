@@ -8,6 +8,8 @@ package accesoDatos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import objeto.Tarea;
@@ -24,7 +26,7 @@ public class TareaDAO extends DatabaseConnection implements IDAO<Tarea> {
 
     @Override
     public void insertar(Tarea obj) throws Exception {
-        String sql = "INSERT INTO `tarea` (`idtarea`, `nombre`, `desc`, `estado`) VALUES (NULL, ?, ? , ?)";
+        String sql = "INSERT INTO `tarea` (`idtarea`, `nombre`, `estado`) VALUES (NULL, ? , ?)";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
@@ -32,8 +34,7 @@ public class TareaDAO extends DatabaseConnection implements IDAO<Tarea> {
             Logger.getLogger(TareaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         ps.setString(1, obj.getNombre());
-        ps.setString(2, obj.getDescripcion());
-        ps.setInt(3, 0);
+        ps.setInt(2, 0);
 
         ps.executeUpdate();
         ps.close();
@@ -56,7 +57,39 @@ public class TareaDAO extends DatabaseConnection implements IDAO<Tarea> {
 
     @Override
     public ResultSet consultarTodos() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
+//        String sql = "SELECT * FROM `tarea` ORDER BY nombre ASC";
+//        try {
+//            return stmt.executeQuery(sql);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(TareaDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return null;
+    }
+    
+       public ArrayList<Tarea> consultar() {
+        ArrayList<Tarea> listaTareas = new ArrayList<>();
+        try {
+            Statement stmt = con.createStatement();
+            String codigoSQL = "SELECT * FROM `tarea`";
+            ResultSet rs = stmt.executeQuery(codigoSQL);
+            
+            while (rs.next()) {
+                int idTarea = rs.getInt("idtarea");
+                String nombre = rs.getString("nombre");
+                int estado = rs.getInt("estado");
+                
+                Tarea tarea = new Tarea(idTarea, nombre, estado);
+                listaTareas.add(tarea);
+            }
+
+            return listaTareas;
+            
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        }
+        return null;
     }
 
 }

@@ -6,7 +6,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -23,15 +23,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
+          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -42,53 +39,49 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabel2" max="32767" attributes="0"/>
-                          <Component id="jLabel1" pref="118" max="32767" attributes="0"/>
-                      </Group>
-                      <Component id="btnRegistrar" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <EmptySpace pref="22" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtNombre" pref="264" max="32767" attributes="0"/>
-                              <Component id="txtDesc" max="32767" attributes="0"/>
-                          </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="btn_verTareas" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                          <Component id="btnLimpiar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-                          <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                  <Component id="txtNombre" min="-2" pref="280" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="btnRegistrar" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btnLimpiar" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Component id="jLabel1" alignment="0" min="-2" pref="193" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="17" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="166" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" pref="35" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="txtNombre" min="-2" pref="47" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel1" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
-                      <Component id="txtNombre" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jLabel2" max="32767" attributes="0"/>
-                      <Component id="txtDesc" pref="47" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="64" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnRegistrar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnRegistrar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="btn_verTareas" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="25" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -96,20 +89,13 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Nombre Tarea"/>
+            <Property name="text" type="java.lang.String" value="Nombre Tarea (Max 100 carac.)"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNombre">
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Descripci&#xf3;n"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtDesc">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDescActionPerformed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNombreKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnRegistrar">
@@ -124,11 +110,25 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Limpiar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimpiarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnCancelar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cancelar "/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btn_verTareas">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ver lista de tareas"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_verTareasActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

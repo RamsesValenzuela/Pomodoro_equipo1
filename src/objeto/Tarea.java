@@ -13,19 +13,17 @@ public class Tarea {
     
     private int id;
     private String nombre;
-    private String descripcion;
     private int estado;
 
     
-    public Tarea(int id, String nombre, String descripcion, int estado) {
+    public Tarea(int id, String nombre, int estado) {
+        this.id = id;
         this.nombre = nombre;
-        this.descripcion = descripcion;
         this.estado = estado;
     }
 
-    public Tarea(String nombre, String descripcion) {
+    public Tarea(String nombre) {
         this.nombre = nombre;
-        this.descripcion = descripcion;
     }
 
     
@@ -49,14 +47,6 @@ public class Tarea {
         this.nombre = nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
     public int getEstado() {
         return estado;
     }
@@ -67,7 +57,7 @@ public class Tarea {
 
     @Override
     public String toString() {
-        return "Tarea{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", estado=" + estado + '}';
+        return "Tarea{" + "id=" + id + ", nombre=" + nombre + ", estado=" + estado + '}';
     }
     
     
