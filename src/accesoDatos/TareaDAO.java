@@ -66,25 +66,25 @@ public class TareaDAO extends DatabaseConnection implements IDAO<Tarea> {
 //        }
 //        return null;
     }
-    
-       public ArrayList<Tarea> consultar() {
+
+    public ArrayList<Tarea> consultar() {
         ArrayList<Tarea> listaTareas = new ArrayList<>();
         try {
-            Statement stmt = con.createStatement();
+            Statement stmtCon = con.createStatement();
             String codigoSQL = "SELECT * FROM `tarea`";
-            ResultSet rs = stmt.executeQuery(codigoSQL);
-            
+            ResultSet rs = stmtCon.executeQuery(codigoSQL);
+
             while (rs.next()) {
                 int idTarea = rs.getInt("idtarea");
                 String nombre = rs.getString("nombre");
                 int estado = rs.getInt("estado");
-                
+
                 Tarea tarea = new Tarea(idTarea, nombre, estado);
                 listaTareas.add(tarea);
             }
 
             return listaTareas;
-            
+
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
 
