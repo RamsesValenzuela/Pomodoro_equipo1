@@ -115,6 +115,7 @@ public class FmrPomodoro extends javax.swing.JFrame {
         pomodoroTimer();
         numPomodoro = 1;
         pausa = false;
+        btnIniciar.setEnabled(false);
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void btnPausaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPausaActionPerformed
@@ -133,6 +134,7 @@ public class FmrPomodoro extends javax.swing.JFrame {
         lbTiempo.setText("00:00:00");
         btnPausa.setEnabled(false);
         btnRestart.setEnabled(false);
+        btnIniciar.setEnabled(true);
     }//GEN-LAST:event_btnRestartActionPerformed
 
     public void setTime(int time) {
