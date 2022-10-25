@@ -28,6 +28,7 @@ public class Tarea {
 
     
     public Tarea(int id, int estado) {
+        this.id = id;
         this.estado = estado;
     }
 

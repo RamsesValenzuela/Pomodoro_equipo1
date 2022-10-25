@@ -6,8 +6,6 @@
 package frames;
 
 import accesoDatos.TareaDAO;
-import java.awt.Color;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,12 +44,14 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btn_progreso = new javax.swing.JButton();
+        btn_pendiente = new javax.swing.JButton();
         txtEstado = new javax.swing.JTextField();
         btn_ArrowDown = new javax.swing.JButton();
         btn_ArrowUP = new javax.swing.JButton();
         btn_agregarTarea = new javax.swing.JButton();
+        btn_finalizar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,24 +75,29 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Nombre");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 60, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 40, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel3.setText("Estado");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 130, -1, -1));
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 60, 290, 30));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 110, -1, -1));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 70, 290, 30));
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_progreso.setText("En progreso");
+        btn_progreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_progresoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 190, -1, -1));
+        jPanel1.add(btn_progreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 210, -1, -1));
 
-        jButton2.setText("jButton2");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 190, -1, -1));
-        jPanel1.add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 130, 290, 30));
+        btn_pendiente.setText("Pendiente");
+        btn_pendiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_pendienteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_pendiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 210, -1, -1));
+        jPanel1.add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 140, 290, 30));
 
         btn_ArrowDown.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         btn_ArrowDown.setText("↓");
@@ -118,7 +123,18 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
                 btn_agregarTareaActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_agregarTarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 230, 190, -1));
+        jPanel1.add(btn_agregarTarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 250, 190, -1));
+
+        btn_finalizar.setText("Finalizar");
+        btn_finalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_finalizarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_finalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 210, -1, -1));
+
+        jLabel2.setText("Cambiar estado de la tarea");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 190, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,9 +155,9 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btn_progresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_progresoActionPerformed
+        this.actualizarEstado(1);
+    }//GEN-LAST:event_btn_progresoActionPerformed
     
     private void btn_ArrowUPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ArrowUPActionPerformed
         this.subirTarea();
@@ -156,6 +172,14 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         fmrtareas.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_agregarTareaActionPerformed
+
+    private void btn_pendienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pendienteActionPerformed
+        this.actualizarEstado(0);
+    }//GEN-LAST:event_btn_pendienteActionPerformed
+
+    private void btn_finalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_finalizarActionPerformed
+       this.actualizarEstado(2);
+    }//GEN-LAST:event_btn_finalizarActionPerformed
 
     boolean rowSeleccionado = false;
     int index;
@@ -224,6 +248,29 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         }
     }
     
+    private boolean validarSeleccionado() {
+        if (tablaTareas.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Una tarea debe ser seleccionada primero.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    
+    public void actualizarEstado(int n) {
+        if (validarSeleccionado()) {
+            try {
+                tareaDAO.actualizar(new Tarea((int) tablaTareas.getModel().getValueAt(tablaTareas.getSelectedRow(), 0), n));
+                this.llenarTabla();
+                
+            } catch (Exception ex) {
+                Logger.getLogger(fmrTareasPendientes.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Hubo un error al actualizar el estado de la tarea", "Error!!", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            JOptionPane.showMessageDialog(this, "Tarea actualizada correctamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -263,9 +310,11 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
     private javax.swing.JButton btn_ArrowDown;
     private javax.swing.JButton btn_ArrowUP;
     private javax.swing.JButton btn_agregarTarea;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btn_finalizar;
+    private javax.swing.JButton btn_pendiente;
+    private javax.swing.JButton btn_progreso;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;

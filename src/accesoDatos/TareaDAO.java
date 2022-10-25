@@ -42,7 +42,16 @@ public class TareaDAO extends DatabaseConnection implements IDAO<Tarea> {
 
     @Override
     public void actualizar(Tarea obj) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = String.format("UPDATE tarea SET estado = '%d' WHERE idtarea = %d",
+                obj.getEstado(),
+                obj.getId());
+                    
+        Statement statement = con.createStatement();
+
+        int registroAfectado = statement.executeUpdate(sql);
+        if (registroAfectado != 1) {
+            throw new Exception("El estado de la tarea no ha podido ser actualizado.");
+        }
     }
 
     @Override
