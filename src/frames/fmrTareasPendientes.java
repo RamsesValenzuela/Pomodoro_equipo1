@@ -227,7 +227,21 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
             tablaTareas.setRowSelectionInterval(index + 1, index + 1);
         }
     }
-
+    public String parsearEstado(int var){
+        String estado;
+        switch (var) {
+            case 0:
+                estado="pendiente";
+                break;
+            case 1:
+                estado="en progreso";
+                break;
+            default:
+                estado="terminado";
+                break;
+        }
+        return estado;
+    }
     public void llenarTabla() {
        try {
             ArrayList<Tarea> listaTareas = tareaDAO.consultar();
@@ -239,7 +253,7 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
                
                filaDatos[0] = tarea.getId();
                filaDatos[1] = tarea.getNombre();
-               filaDatos[2] = tarea.getEstado();
+               filaDatos[2] = parsearEstado(tarea.getEstado());
                
                modeloTabla.addRow(filaDatos);
            }

@@ -26,7 +26,11 @@ public class TareaDAO extends DatabaseConnection implements IDAO<Tarea> {
 
     @Override
     public void insertar(Tarea obj) throws Exception {
-        String sql = "INSERT INTO `tarea` (`idtarea`, `nombre`, `estado`) VALUES (NULL, ? , ?)";
+        Tarea exist=consultarPorNombre(obj.getNombre());
+        if(exist!=null&&exist.getEstado()!=2){
+            throw new Exception("ya existe la tarea");
+        }else{
+            String sql = "INSERT INTO `tarea` (`idtarea`, `nombre`, `estado`) VALUES (NULL, ? , ?)";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
@@ -38,6 +42,8 @@ public class TareaDAO extends DatabaseConnection implements IDAO<Tarea> {
 
         ps.executeUpdate();
         ps.close();
+        }
+        
     }
 
     @Override
@@ -45,7 +51,7 @@ public class TareaDAO extends DatabaseConnection implements IDAO<Tarea> {
         String sql = String.format("UPDATE tarea SET estado = '%d' WHERE idtarea = %d",
                 obj.getEstado(),
                 obj.getId());
-                    
+
         Statement statement = con.createStatement();
 
         int registroAfectado = statement.executeUpdate(sql);
@@ -58,10 +64,50 @@ public class TareaDAO extends DatabaseConnection implements IDAO<Tarea> {
     public void eliminar(int id) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    public Tarea consultarPorNombre(String nombreB) throws Exception {
+        Tarea tarea=null;
+        try {
+            Statement stmtCon = con.createStatement();
+            String codigoSQL = "SELECT * FROM `tarea` WHERE nombre="+nombreB;
+            ResultSet rs = stmtCon.executeQuery(codigoSQL);
 
+            while (rs.next()) {
+                int idTarea = rs.getInt("idtarea");
+                String nombre = rs.getString("nombre");
+                int estado = rs.getInt("estado");
+
+                tarea = new Tarea(idTarea, nombre, estado);
+            }
+
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        }
+        return tarea;
+    }
     @Override
     public Tarea consultarPorId(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Tarea tarea=null;
+        try {
+            Statement stmtCon = con.createStatement();
+            String codigoSQL = "SELECT * FROM `tarea` WHERE idtarea="+id;
+            ResultSet rs = stmtCon.executeQuery(codigoSQL);
+
+            while (rs.next()) {
+                int idTarea = rs.getInt("idtarea");
+                String nombre = rs.getString("nombre");
+                int estado = rs.getInt("estado");
+
+                tarea = new Tarea(idTarea, nombre, estado);
+            }
+
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        }
+        return tarea;
     }
 
     @Override
