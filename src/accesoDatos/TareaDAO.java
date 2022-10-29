@@ -26,24 +26,26 @@ public class TareaDAO extends DatabaseConnection implements IDAO<Tarea> {
 
     @Override
     public void insertar(Tarea obj) throws Exception {
-        Tarea exist=consultarPorNombre(obj.getNombre());
-        if(exist!=null&&exist.getEstado()!=2){
-            throw new Exception("ya existe la tarea");
-        }else{
-            String sql = "INSERT INTO `tarea` (`idtarea`, `nombre`, `estado`) VALUES (NULL, ? , ?)";
-        PreparedStatement ps = null;
-        try {
-            ps = con.prepareStatement(sql);
-        } catch (SQLException ex) {
-            Logger.getLogger(TareaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        ps.setString(1, obj.getNombre());
-        ps.setInt(2, 0);
-
-        ps.executeUpdate();
-        ps.close();
-        }
+        Tarea exist = consultarPorNombre(obj.getNombre());
         
+        if (exist != null && exist.getEstado() != 2) {
+            throw new Exception("La tarea insertada ya existe...");
+            
+        } else {
+            String sql = "INSERT INTO `tarea` (`idtarea`, `nombre`, `estado`) VALUES (NULL, ? , ?)";
+            PreparedStatement ps = null;
+            try {
+                ps = con.prepareStatement(sql);
+            } catch (SQLException ex) {
+                Logger.getLogger(TareaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            ps.setString(1, obj.getNombre());
+            ps.setInt(2, 0);
+
+            ps.executeUpdate();
+            ps.close();
+        }
+
     }
 
     @Override
@@ -65,10 +67,10 @@ public class TareaDAO extends DatabaseConnection implements IDAO<Tarea> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     public Tarea consultarPorNombre(String nombreB) throws Exception {
-        Tarea tarea=null;
+        Tarea tarea = null;
         try {
             Statement stmtCon = con.createStatement();
-            String codigoSQL = "SELECT * FROM `tarea` WHERE nombre="+nombreB;
+            String codigoSQL = String.format("SELECT * FROM `tarea` WHERE nombre = '%s'", nombreB);
             ResultSet rs = stmtCon.executeQuery(codigoSQL);
 
             while (rs.next()) {
@@ -78,7 +80,6 @@ public class TareaDAO extends DatabaseConnection implements IDAO<Tarea> {
 
                 tarea = new Tarea(idTarea, nombre, estado);
             }
-
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -86,12 +87,13 @@ public class TareaDAO extends DatabaseConnection implements IDAO<Tarea> {
         }
         return tarea;
     }
+
     @Override
     public Tarea consultarPorId(int id) throws Exception {
-        Tarea tarea=null;
+        Tarea tarea = null;
         try {
             Statement stmtCon = con.createStatement();
-            String codigoSQL = "SELECT * FROM `tarea` WHERE idtarea="+id;
+            String codigoSQL = "SELECT * FROM `tarea` WHERE idtarea=" + id;
             ResultSet rs = stmtCon.executeQuery(codigoSQL);
 
             while (rs.next()) {
@@ -101,7 +103,6 @@ public class TareaDAO extends DatabaseConnection implements IDAO<Tarea> {
 
                 tarea = new Tarea(idTarea, nombre, estado);
             }
-
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
