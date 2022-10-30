@@ -222,7 +222,12 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_pendienteActionPerformed
 
     private void btn_finalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_finalizarActionPerformed
-       this.actualizarEstado(2, 3);
+       int opcion = JOptionPane.showConfirmDialog(this, "Seguro de haber terminado esta tarea?", "Confirmacion",JOptionPane.YES_NO_OPTION,
+               JOptionPane.QUESTION_MESSAGE);
+       if(opcion == JOptionPane.YES_OPTION){
+              this.actualizarEstado(2, 3);
+       }
+       
     }//GEN-LAST:event_btn_finalizarActionPerformed
 
     boolean rowSeleccionado = false;

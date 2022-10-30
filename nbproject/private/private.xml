@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Orlando%20Mendivil/Documents/GitHub/Pomodoro_equipo1/src/objeto/Tarea.java</file>
-            <file>file:/C:/Users/Orlando%20Mendivil/Documents/GitHub/Pomodoro_equipo1/src/accesoDatos/TareaDAO.java</file>
-            <file>file:/C:/Users/Orlando%20Mendivil/Documents/GitHub/Pomodoro_equipo1/src/pomodoro/Pomodoro.java</file>
-            <file>file:/C:/Users/Orlando%20Mendivil/Documents/GitHub/Pomodoro_equipo1/src/frames/fmrTareas.java</file>
-            <file>file:/C:/Users/Orlando%20Mendivil/Documents/GitHub/Pomodoro_equipo1/src/frames/fmrTareasPendientes.java</file>
+            <file>file:/C:/Users/PC/OneDrive/Documentos/NetBeansProjects/pomodoro/src/accesoDatos/TareaDAO.java</file>
+            <file>file:/C:/Users/PC/OneDrive/Documentos/NetBeansProjects/pomodoro/src/frames/fmrTareas.java</file>
+            <file>file:/C:/Users/PC/OneDrive/Documentos/NetBeansProjects/pomodoro/src/accesoDatos/DatabaseConnection.java</file>
+            <file>file:/C:/Users/PC/OneDrive/Documentos/NetBeansProjects/pomodoro/src/frames/FmrPomodoro.java</file>
+            <file>file:/C:/Users/PC/OneDrive/Documentos/NetBeansProjects/pomodoro/src/frames/fmrTareasPendientes.java</file>
         </group>
     </open-files>
 </project-private>
