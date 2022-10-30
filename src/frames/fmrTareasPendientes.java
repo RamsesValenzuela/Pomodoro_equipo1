@@ -40,7 +40,7 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tablaTareas = new javax.swing.JTable();
+        tablaTareasFinalizadas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
@@ -51,14 +51,20 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         btn_ArrowUP = new javax.swing.JButton();
         btn_agregarTarea = new javax.swing.JButton();
         btn_finalizar = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablaTareasPendientes = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tablaTareasProgreso = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tablaTareas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        tablaTareas.setModel(new javax.swing.table.DefaultTableModel(
+        tablaTareasFinalizadas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tablaTareasFinalizadas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -69,18 +75,18 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
                 "ID", "Nombre", "Estado"
             }
         ));
-        jScrollPane2.setViewportView(tablaTareas);
+        jScrollPane2.setViewportView(tablaTareasFinalizadas);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 772, 521));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 360, 90));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Nombre");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 40, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel3.setText("Estado");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 110, -1, -1));
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 70, 290, 30));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, -1, -1));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 290, 30));
 
         btn_progreso.setText("En progreso");
         btn_progreso.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +94,7 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
                 btn_progresoActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_progreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 210, -1, -1));
+        jPanel1.add(btn_progreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, -1, -1));
 
         btn_pendiente.setText("Pendiente");
         btn_pendiente.addActionListener(new java.awt.event.ActionListener() {
@@ -96,26 +102,26 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
                 btn_pendienteActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_pendiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 210, -1, -1));
-        jPanel1.add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 140, 290, 30));
+        jPanel1.add(btn_pendiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, -1, -1));
+        jPanel1.add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, 290, 30));
 
-        btn_ArrowDown.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        btn_ArrowDown.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btn_ArrowDown.setText("↓");
         btn_ArrowDown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ArrowDownActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_ArrowDown, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 430, 70, 70));
+        jPanel1.add(btn_ArrowDown, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 40, 40));
 
-        btn_ArrowUP.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        btn_ArrowUP.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btn_ArrowUP.setText("↑");
         btn_ArrowUP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ArrowUPActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_ArrowUP, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 350, 70, 70));
+        jPanel1.add(btn_ArrowUP, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, 40, 40));
 
         btn_agregarTarea.setText("Agregar una nueva tarea");
         btn_agregarTarea.addActionListener(new java.awt.event.ActionListener() {
@@ -123,7 +129,7 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
                 btn_agregarTareaActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_agregarTarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 250, 190, -1));
+        jPanel1.add(btn_agregarTarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 220, 190, -1));
 
         btn_finalizar.setText("Finalizar");
         btn_finalizar.addActionListener(new java.awt.event.ActionListener() {
@@ -131,10 +137,48 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
                 btn_finalizarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_finalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 210, -1, -1));
+        jPanel1.add(btn_finalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 310, -1, -1));
 
-        jLabel2.setText("Cambiar estado de la tarea");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 190, -1, -1));
+        jLabel4.setText("Tareas pendientes");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+
+        jLabel5.setText("Tareas En progreso");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+
+        tablaTareasPendientes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tablaTareasPendientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "Nombre", "Estado"
+            }
+        ));
+        jScrollPane3.setViewportView(tablaTareasPendientes);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 360, 90));
+
+        jLabel6.setText("Tareas Finalizadas");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, -1, -1));
+
+        tablaTareasProgreso.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tablaTareasProgreso.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "Nombre", "Estado"
+            }
+        ));
+        jScrollPane4.setViewportView(tablaTareasProgreso);
+
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 360, 90));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -156,7 +200,7 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_progresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_progresoActionPerformed
-        this.actualizarEstado(1);
+        this.actualizarEstado(1, 1);
     }//GEN-LAST:event_btn_progresoActionPerformed
     
     private void btn_ArrowUPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ArrowUPActionPerformed
@@ -174,11 +218,11 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_agregarTareaActionPerformed
 
     private void btn_pendienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pendienteActionPerformed
-        this.actualizarEstado(0);
+        this.actualizarEstado(0, 2);
     }//GEN-LAST:event_btn_pendienteActionPerformed
 
     private void btn_finalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_finalizarActionPerformed
-       this.actualizarEstado(2);
+       this.actualizarEstado(2, 3);
     }//GEN-LAST:event_btn_finalizarActionPerformed
 
     boolean rowSeleccionado = false;
@@ -188,11 +232,11 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
     public void subirTarea() {
         if (rowSeleccionado == false) 
         {
-            model = (DefaultTableModel) tablaTareas.getModel();
+            model = (DefaultTableModel) tablaTareasPendientes.getModel();
             rowSeleccionado = true;
         }
 
-        index = tablaTareas.getSelectedRow();
+        index = tablaTareasPendientes.getSelectedRow();
 
         if (index == -1) 
         {
@@ -202,18 +246,18 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         
         if (index > 0) {
             model.moveRow(index, index, index - 1);
-            tablaTareas.setRowSelectionInterval(index - 1, index - 1);
+            tablaTareasPendientes.setRowSelectionInterval(index - 1, index - 1);
         }
     }
 
     public void bajarTarea() {
         if (rowSeleccionado == false) 
         {
-            model = (DefaultTableModel) tablaTareas.getModel();  
+            model = (DefaultTableModel) tablaTareasPendientes.getModel();  
             rowSeleccionado = true;
         }
 
-        index = tablaTareas.getSelectedRow();
+        index = tablaTareasPendientes.getSelectedRow();
 
         if (index == -1) 
         {
@@ -224,7 +268,7 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         if (index < model.getRowCount() - 1) 
         {
             model.moveRow(index, index, index + 1);
-            tablaTareas.setRowSelectionInterval(index + 1, index + 1);
+            tablaTareasPendientes.setRowSelectionInterval(index + 1, index + 1);
         }
     }
     public String parsearEstado(int var){
@@ -245,8 +289,13 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
     public void llenarTabla() {
        try {
             ArrayList<Tarea> listaTareas = tareaDAO.consultar();
-            DefaultTableModel modeloTabla = (DefaultTableModel) this.tablaTareas.getModel();
-            modeloTabla.setRowCount(0);
+            DefaultTableModel modeloTablaPendiente = (DefaultTableModel) this.tablaTareasPendientes.getModel();
+            DefaultTableModel modeloTablaProgreso = (DefaultTableModel) this.tablaTareasProgreso.getModel();
+            DefaultTableModel modeloTablaFinalizado = (DefaultTableModel) this.tablaTareasFinalizadas.getModel();
+            
+            modeloTablaPendiente.setRowCount(0);
+            modeloTablaProgreso.setRowCount(0);
+            modeloTablaFinalizado.setRowCount(0);
             
             for (Tarea tarea : listaTareas) {
                Object[] filaDatos = new Object[3];
@@ -255,7 +304,24 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
                filaDatos[1] = tarea.getNombre();
                filaDatos[2] = parsearEstado(tarea.getEstado());
                
-               modeloTabla.addRow(filaDatos);
+               switch(tarea.getEstado()){
+                   case 0:
+                   {
+                       modeloTablaPendiente.addRow(filaDatos);
+                       break;
+                   }
+                   case 1:
+                   {
+                       modeloTablaProgreso.addRow(filaDatos);
+                       break;
+                   }
+                   case 2:
+                   {
+                       modeloTablaFinalizado.addRow(filaDatos);
+                       break;
+                   }
+               }
+               
            }
         } catch (Exception ex) {
             System.out.println(ex.getCause());
@@ -263,18 +329,37 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
     }
     
     private boolean validarSeleccionado() {
-        if (tablaTareas.getSelectedRow() == -1) {
+        if (tablaTareasPendientes.getSelectedRow() == -1 && tablaTareasProgreso.getSelectedRow() == -1 && tablaTareasFinalizadas.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Una tarea debe ser seleccionada primero.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
         return true;
     }
     
-    public void actualizarEstado(int n) {
+    public void actualizarEstado(int n, int numTabla) {
         if (validarSeleccionado()) {
             try {
-                tareaDAO.actualizar(new Tarea((int) tablaTareas.getModel().getValueAt(tablaTareas.getSelectedRow(), 0), n));
-                this.llenarTabla();
+                switch(numTabla){
+                    case 1:
+                    {
+                        tareaDAO.actualizar(new Tarea((int) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 0), n));
+                        this.llenarTabla();
+                        break;
+                    }
+                    case 2:
+                    {
+                        tareaDAO.actualizar(new Tarea((int) tablaTareasProgreso.getModel().getValueAt(tablaTareasProgreso.getSelectedRow(), 0), n));
+                        this.llenarTabla();
+                        break;
+                    }
+                    case 3:
+                    {
+                        tareaDAO.actualizar(new Tarea((int) tablaTareasProgreso.getModel().getValueAt(tablaTareasProgreso.getSelectedRow(), 0), n));
+                        this.llenarTabla();
+                        break;
+                    }
+                }
+                
                 
             } catch (Exception ex) {
                 Logger.getLogger(fmrTareasPendientes.class.getName()).log(Level.SEVERE, null, ex);
@@ -328,11 +413,17 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
     private javax.swing.JButton btn_pendiente;
     private javax.swing.JButton btn_progreso;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tablaTareas;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable tablaTareasFinalizadas;
+    private javax.swing.JTable tablaTareasPendientes;
+    private javax.swing.JTable tablaTareasProgreso;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
