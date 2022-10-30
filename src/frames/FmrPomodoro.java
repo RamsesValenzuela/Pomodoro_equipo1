@@ -41,6 +41,8 @@ public class FmrPomodoro extends javax.swing.JFrame {
         btnIniciar = new javax.swing.JButton();
         btnPausa = new javax.swing.JButton();
         btnRestart = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        lbPomodoro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,6 +61,7 @@ public class FmrPomodoro extends javax.swing.JFrame {
         });
 
         btnPausa.setText("Pausar");
+        btnPausa.setEnabled(false);
         btnPausa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPausaActionPerformed(evt);
@@ -72,38 +75,51 @@ public class FmrPomodoro extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Numero de pomodoros: ");
+
+        lbPomodoro.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(112, 112, 112)
-                .addComponent(btnIniciar)
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
+                        .addGap(66, 66, 66)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(94, 94, 94)
+                        .addComponent(btnIniciar)
+                        .addGap(67, 67, 67)
                         .addComponent(btnPausa)
-                        .addGap(40, 40, 40)
-                        .addComponent(btnRestart))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(lbTiempo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)))
-                .addContainerGap(182, Short.MAX_VALUE))
+                        .addGap(53, 53, 53)
+                        .addComponent(btnRestart)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbPomodoro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbPomodoro, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(lbTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(150, 150, 150)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIniciar)
                     .addComponent(btnPausa)
                     .addComponent(btnRestart))
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addGap(127, 127, 127))
         );
 
         pack();
@@ -121,6 +137,7 @@ public class FmrPomodoro extends javax.swing.JFrame {
         if (!pausa) {
             pausa = true;
             btnRestart.setEnabled(false);
+            btnPausa.setText("Reanudar");
         } else {
             pausa = false;
             btnPausa.setText("Pause");
@@ -133,6 +150,9 @@ public class FmrPomodoro extends javax.swing.JFrame {
         lbTiempo.setText("00:00:00");
         btnPausa.setEnabled(false);
         btnRestart.setEnabled(false);
+        btnIniciar.setEnabled(true);
+        lbPomodoro.setText("");
+
     }//GEN-LAST:event_btnRestartActionPerformed
 
     public void setTime(int time) {
@@ -158,14 +178,15 @@ public class FmrPomodoro extends javax.swing.JFrame {
                 if (!pausa) {
                     ++counter;
                     setTime(counter);
-                    if (counter == cont && numPomodoro < 4) //if less than 4 pomodoros are complete, take a short break
+                    if (counter == cont && numPomodoro < 4) 
                     {
                         timer.cancel();
                         Toolkit.getDefaultToolkit().beep();
                         JOptionPane.showMessageDialog(null, "Completaste un pomodoro, Puedes tomar un pequeño descanso!!");
                         descansoCorto();
                         numPomodoro++;
-                    } else if (counter == cont && numPomodoro == 4) //if 4 pomodoros are complete, take a long break
+                        lbPomodoro.setText(Integer.toString(numPomodoro));
+                    } else if (counter == cont && numPomodoro == 4)
                     {
                         timer.cancel();
                         Toolkit.getDefaultToolkit().beep();
@@ -173,6 +194,8 @@ public class FmrPomodoro extends javax.swing.JFrame {
                         descansoLargo();
                     }
                 }
+                lbPomodoro.setText(Integer.toString(numPomodoro));
+
             }
         }, 0, 1000);
 
@@ -270,6 +293,8 @@ public class FmrPomodoro extends javax.swing.JFrame {
     private javax.swing.JButton btnPausa;
     private javax.swing.JButton btnRestart;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lbPomodoro;
     private javax.swing.JLabel lbTiempo;
     // End of variables declaration//GEN-END:variables
 }
