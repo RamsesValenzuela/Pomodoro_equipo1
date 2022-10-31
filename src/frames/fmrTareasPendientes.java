@@ -189,7 +189,7 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 360, 90));
 
-        btn_pomodoro.setText("Iniciar pomodoro");
+        btn_pomodoro.setText("Abrir pomodoro");
         btn_pomodoro.setName(""); // NOI18N
         btn_pomodoro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

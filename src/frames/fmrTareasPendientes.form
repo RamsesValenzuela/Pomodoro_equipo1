@@ -357,7 +357,7 @@
         </Container>
         <Component class="javax.swing.JButton" name="btn_pomodoro">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Iniciar pomodoro"/>
+            <Property name="text" type="java.lang.String" value="Abrir pomodoro"/>
             <Property name="name" type="java.lang.String" value="" noResource="true"/>
           </Properties>
           <Events>
