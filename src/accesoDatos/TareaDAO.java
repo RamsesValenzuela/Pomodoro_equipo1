@@ -32,7 +32,7 @@ public class TareaDAO extends DatabaseConnection implements IDAO<Tarea> {
             throw new Exception("La tarea insertada ya existe...");
             
         } else {
-            String sql = "INSERT INTO `tarea` (`idtarea`, `nombre`, `estado`) VALUES (NULL, ? , ?)";
+            String sql = "INSERT INTO `tarea` ( `idtarea`,`nombre`, `estado`) VALUES (NULL, ? , ?)";
             PreparedStatement ps = null;
             try {
                 ps = con.prepareStatement(sql);

@@ -9,6 +9,7 @@ import java.awt.Toolkit;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JOptionPane;
+import objeto.Tarea;
 
 /**
  *
@@ -18,13 +19,17 @@ public class FmrPomodoro extends javax.swing.JFrame {
 
     private Timer timer;
     private int numPomodoro;
-    boolean pausa;
-
+    private boolean pausa;
+    private Tarea haciendo;
+    private String leyenda="Haciendo: ";
     /**
      * Creates new form FmrPomodoro
+     * @param tarea
      */
-    public FmrPomodoro() {
+    public FmrPomodoro(Tarea tarea) {
+        this.haciendo=tarea;
         initComponents();
+        this.jLabel3.setText(leyenda+tarea.getNombre());
     }
 
     /**
@@ -41,6 +46,8 @@ public class FmrPomodoro extends javax.swing.JFrame {
         btnIniciar = new javax.swing.JButton();
         btnPausa = new javax.swing.JButton();
         btnRestart = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,8 +55,8 @@ public class FmrPomodoro extends javax.swing.JFrame {
         lbTiempo.setText("0:00:00");
         lbTiempo.setToolTipText("");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("Pomodoro");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Descansos antes del descanso largo: 3");
 
         btnIniciar.setText("Iniciar");
         btnIniciar.addActionListener(new java.awt.event.ActionListener() {
@@ -72,6 +79,11 @@ public class FmrPomodoro extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setText("Pomodoro");
+
+        jLabel3.setText("Haciendo:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,31 +91,46 @@ public class FmrPomodoro extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(112, 112, 112)
                 .addComponent(btnIniciar)
-                .addGap(17, 17, 17)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(btnPausa)
-                        .addGap(40, 40, 40)
-                        .addComponent(btnRestart))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(lbTiempo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)))
-                .addContainerGap(182, Short.MAX_VALUE))
+                        .addComponent(lbTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(btnPausa)
+                                .addGap(40, 40, 40)
+                                .addComponent(btnRestart))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
+                        .addContainerGap(45, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(211, 211, 211)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(35, 35, 35)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(150, 150, 150)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(84, 84, 84)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIniciar)
                     .addComponent(btnPausa)
                     .addComponent(btnRestart))
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -122,10 +149,12 @@ public class FmrPomodoro extends javax.swing.JFrame {
         if (!pausa) {
             pausa = true;
             btnRestart.setEnabled(false);
+            this.btnPausa.setText("Reanudar");
         } else {
             pausa = false;
             btnPausa.setText("Pause");
             btnRestart.setEnabled(true);
+            this.btnPausa.setText("Pausar");
         }
     }//GEN-LAST:event_btnPausaActionPerformed
 
@@ -146,7 +175,7 @@ public class FmrPomodoro extends javax.swing.JFrame {
     }
 
     private void pomodoroTimer() {
-        String pomodoroTime = "0:00:25";
+        String pomodoroTime = "0:00:15";
         timer = new Timer();
         timer.schedule(new TimerTask() {
             int counter = 0;
@@ -160,13 +189,17 @@ public class FmrPomodoro extends javax.swing.JFrame {
                 if (!pausa) {
                     ++counter;
                     setTime(counter);
+                    if (counter==(cont-5)) {
+                        Toolkit.getDefaultToolkit().beep();
+                        JOptionPane.showMessageDialog(null, "5 segundos para el descanso");
+                    }
                     if (counter == cont && numPomodoro < 4) //if less than 4 pomodoros are complete, take a short break
                     {
                         timer.cancel();
                         Toolkit.getDefaultToolkit().beep();
                         JOptionPane.showMessageDialog(null, "Completaste un pomodoro, Puedes tomar un pequeño descanso!!");
                         descansoCorto();
-                        numPomodoro++;
+                        
                     } else if (counter == cont && numPomodoro == 4) //if 4 pomodoros are complete, take a long break
                     {
                         timer.cancel();
@@ -181,7 +214,7 @@ public class FmrPomodoro extends javax.swing.JFrame {
     }
 
     private void descansoCorto() {
-        String descansoCorto = "0:00:05";
+        String descansoCorto = "0:00:07";
         timer = new Timer();
         timer.schedule(new TimerTask() {
             int cont = 0;
@@ -194,10 +227,17 @@ public class FmrPomodoro extends javax.swing.JFrame {
                 if (!pausa) {
                     ++cont;
                     setTime(cont);
+                    if (cont==(lim-5)) {
+                        Toolkit.getDefaultToolkit().beep();
+                        JOptionPane.showMessageDialog(null, "5 segundos para empezar de nuevo");
+                    }
                     if (cont == lim) {
                         timer.cancel();
                         Toolkit.getDefaultToolkit().beep();
                         JOptionPane.showMessageDialog(null, "Descanso corto finalizado");
+                        numPomodoro++;
+                        int descansosFaltantes=4-numPomodoro;
+                        jLabel1.setText(descansosFaltantes!=0?"Descansos antes del descanso largo: "+(4-numPomodoro):"El siguiente es un descanso largo!!");
                         pomodoroTimer();
 
                     }
@@ -208,6 +248,7 @@ public class FmrPomodoro extends javax.swing.JFrame {
 
     private void descansoLargo() {
         String descansoLargo = "0:00:10";
+        jLabel1.setText("Descanso largo!!! ");
         timer = new Timer();
         timer.schedule(new TimerTask() {
             int cont = 0;
@@ -220,11 +261,16 @@ public class FmrPomodoro extends javax.swing.JFrame {
                 if (!pausa) {
                     ++cont;
                     setTime(cont);
+                    if (cont==(counterLimit-5)) {
+                        Toolkit.getDefaultToolkit().beep();
+                        JOptionPane.showMessageDialog(null, "5 segundos para empezar de nuevo");
+                    }
                     if (cont == counterLimit) {
                         timer.cancel();
                         Toolkit.getDefaultToolkit().beep();
                         JOptionPane.showMessageDialog(null, "Es hora de continuar con las tareas.");
                         numPomodoro = 1;
+                        jLabel1.setText("Descansos antes del descanso largo: "+(4-numPomodoro));
                         pomodoroTimer();
                     }
                 }
@@ -232,46 +278,14 @@ public class FmrPomodoro extends javax.swing.JFrame {
         }, 0, 1000);
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FmrPomodoro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FmrPomodoro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FmrPomodoro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FmrPomodoro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FmrPomodoro().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciar;
     private javax.swing.JButton btnPausa;
     private javax.swing.JButton btnRestart;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lbTiempo;
     // End of variables declaration//GEN-END:variables
 }
