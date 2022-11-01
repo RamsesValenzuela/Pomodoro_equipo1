@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class DatabaseConnection {
     
     private String usuario = "root";
-    private String clave = "perfectworld6";
+    private String clave = "1234";
     private String url = "jdbc:mysql://localhost:3306/pomodoro?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     Connection con;
     Statement stmt;
