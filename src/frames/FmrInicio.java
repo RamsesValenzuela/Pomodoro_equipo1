@@ -16,6 +16,7 @@ public class FmrInicio extends javax.swing.JFrame {
      */
     public FmrInicio() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
