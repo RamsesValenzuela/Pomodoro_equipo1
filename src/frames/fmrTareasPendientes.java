@@ -29,12 +29,7 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         this.setTitle("Lista de tareas");
         tareaDAO = new TareaDAO();
         this.llenarTabla();
-        DefaultTableModel modeloTablaProgreso = (DefaultTableModel) this.tablaTareasProgreso.getModel();
-        if (modeloTablaProgreso.getRowCount() != 0) {
-            this.btn_pomodoro.setEnabled(true);
-        } else {
-            this.btn_pomodoro.setEnabled(false);
-        }
+        
     }
 
     /**
@@ -340,6 +335,12 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
                 }
 
             }
+            
+        if (modeloTablaProgreso.getRowCount() != 0) {
+            this.btn_pomodoro.setEnabled(true);
+        } else {
+            this.btn_pomodoro.setEnabled(false);
+        }
         } catch (Exception ex) {
             System.out.println(ex.getCause());
         }
