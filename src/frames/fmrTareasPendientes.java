@@ -49,12 +49,8 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaTareasFinalizadas = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
         btn_progreso = new javax.swing.JButton();
         btn_pendiente = new javax.swing.JButton();
-        txtEstado = new javax.swing.JTextField();
         btn_ArrowDown = new javax.swing.JButton();
         btn_ArrowUP = new javax.swing.JButton();
         btn_agregarTarea = new javax.swing.JButton();
@@ -88,15 +84,6 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 360, 90));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Nombre");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, -1, -1));
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel3.setText("Estado");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, -1, -1));
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 290, 30));
-
         btn_progreso.setText("En progreso");
         btn_progreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,7 +99,6 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_pendiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, -1, -1));
-        jPanel1.add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, 290, 30));
 
         btn_ArrowDown.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btn_ArrowDown.setText("↓");
@@ -406,8 +392,6 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
     private javax.swing.JButton btn_pendiente;
     private javax.swing.JButton btn_pomodoro;
     private javax.swing.JButton btn_progreso;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -418,7 +402,5 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
     private javax.swing.JTable tablaTareasFinalizadas;
     private javax.swing.JTable tablaTareasPendientes;
     private javax.swing.JTable tablaTareasProgreso;
-    private javax.swing.JTextField txtEstado;
-    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
