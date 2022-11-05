@@ -33,6 +33,8 @@ public class FmrPomodoro extends javax.swing.JFrame {
         this.haciendo=tarea;
         initComponents();
         this.jLabel3.setText(leyenda+haciendo.getNombre());
+        btnRestart.setEnabled(false);
+        btnPausa.setEnabled(false);
     }
 
     /**
@@ -166,7 +168,6 @@ public class FmrPomodoro extends javax.swing.JFrame {
     private void btnPausaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPausaActionPerformed
         if (!pausa) {
             pausa = true;
-            btnRestart.setEnabled(false);
             this.btnPausa.setText("Reanudar");
         } else {
             pausa = false;
@@ -177,12 +178,17 @@ public class FmrPomodoro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPausaActionPerformed
 
     private void btnRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestartActionPerformed
+        int opcion = JOptionPane.showConfirmDialog(this, "Seguro de querer reiniciar?", "Confirmacion", JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        if (opcion == JOptionPane.OK_OPTION) {
         timer.cancel();
         lbTiempo.setText("00:00:00");
         btnPausa.setEnabled(false);
         btnRestart.setEnabled(false);
         btnIniciar.setEnabled(true);
         jButton1.setEnabled(true);
+        this.btnPausa.setText("Pausar");
+        }
     }//GEN-LAST:event_btnRestartActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
