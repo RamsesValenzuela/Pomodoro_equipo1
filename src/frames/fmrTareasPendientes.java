@@ -6,6 +6,7 @@
 package frames;
 
 import accesoDatos.TareaDAO;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +30,7 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         this.setTitle("Lista de tareas");
         tareaDAO = new TareaDAO();
         this.llenarTabla();
-        
+
     }
 
     /**
@@ -66,15 +67,23 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         tablaTareasFinalizadas.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tablaTareasFinalizadas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Estado"
+                "ID", "Nombre", "Estado", "Fecha terminacion"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tablaTareasFinalizadas);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 360, 90));
@@ -138,15 +147,23 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         tablaTareasPendientes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tablaTareasPendientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Estado"
+                "ID", "Nombre", "Estado", "prioridad"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(tablaTareasPendientes);
 
         jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 360, 90));
@@ -157,15 +174,23 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         tablaTareasProgreso.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tablaTareasProgreso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Estado"
+                "ID", "Nombre", "Estado", "Prioridad"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane4.setViewportView(tablaTareasProgreso);
 
         jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 360, 90));
@@ -261,6 +286,14 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         }
 
         if (index > 0) {
+            Tarea tarea=new Tarea((int) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 0));
+            tarea.setPrioridad(((int) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 3))+1);
+            try {
+                tareaDAO.actualizarPrioridad(tarea);
+                llenarTabla();
+            } catch (Exception ex) {
+                Logger.getLogger(fmrTareasPendientes.class.getName()).log(Level.SEVERE, null, ex);
+            }
             model.moveRow(index, index, index - 1);
             tablaTareasPendientes.setRowSelectionInterval(index - 1, index - 1);
         }
@@ -280,6 +313,18 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         }
 
         if (index < model.getRowCount() - 1) {
+            Tarea tarea=new Tarea((int) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 0));
+            tarea.setPrioridad(((int) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 3))-1);
+            if (tarea.getPrioridad()<0) {
+                JOptionPane.showMessageDialog(this, "La prioridad no debe bajar de 0!!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+              try {
+                tareaDAO.actualizarPrioridad(tarea);
+                llenarTabla();
+            } catch (Exception ex) {
+                Logger.getLogger(fmrTareasPendientes.class.getName()).log(Level.SEVERE, null, ex);
+            }  
+            }
             model.moveRow(index, index, index + 1);
             tablaTareasPendientes.setRowSelectionInterval(index + 1, index + 1);
         }
@@ -300,47 +345,55 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         }
         return estado;
     }
-
+    public String parsearFecha(String fecha){
+        String parseada= (fecha.split("T")[0]+" "+fecha.split("T")[1]);
+        return parseada;
+    }
     public void llenarTabla() {
         try {
             ArrayList<Tarea> listaTareas = tareaDAO.consultar();
             DefaultTableModel modeloTablaPendiente = (DefaultTableModel) this.tablaTareasPendientes.getModel();
             DefaultTableModel modeloTablaProgreso = (DefaultTableModel) this.tablaTareasProgreso.getModel();
             DefaultTableModel modeloTablaFinalizado = (DefaultTableModel) this.tablaTareasFinalizadas.getModel();
-
+            
+            
             modeloTablaPendiente.setRowCount(0);
             modeloTablaProgreso.setRowCount(0);
             modeloTablaFinalizado.setRowCount(0);
 
             for (Tarea tarea : listaTareas) {
-                Object[] filaDatos = new Object[3];
-
+                Object[] filaDatos = new Object[4];
+                    
+                
                 filaDatos[0] = tarea.getId();
                 filaDatos[1] = tarea.getNombre();
                 filaDatos[2] = parsearEstado(tarea.getEstado());
 
                 switch (tarea.getEstado()) {
                     case 0: {
+                        filaDatos[3]=tarea.getPrioridad();
                         modeloTablaPendiente.addRow(filaDatos);
                         break;
                     }
                     case 1: {
+                        filaDatos[3]=tarea.getPrioridad();
                         modeloTablaProgreso.addRow(filaDatos);
                         break;
                     }
                     case 2: {
+                        filaDatos[3]=parsearFecha(tarea.getFechaDeTerminacion().toString());
                         modeloTablaFinalizado.addRow(filaDatos);
                         break;
                     }
                 }
-
+                
             }
-            
-        if (modeloTablaProgreso.getRowCount() != 0) {
-            this.btn_pomodoro.setEnabled(true);
-        } else {
-            this.btn_pomodoro.setEnabled(false);
-        }
+
+            if (modeloTablaProgreso.getRowCount() != 0) {
+                this.btn_pomodoro.setEnabled(true);
+            } else {
+                this.btn_pomodoro.setEnabled(false);
+            }
         } catch (Exception ex) {
             System.out.println(ex.getCause());
         }
@@ -370,6 +423,9 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
                     }
                     case 3: {
                         tareaDAO.actualizar(new Tarea((int) tablaTareasProgreso.getModel().getValueAt(tablaTareasProgreso.getSelectedRow(), 0), n));
+                        Tarea tarea = new Tarea((int) tablaTareasProgreso.getModel().getValueAt(tablaTareasProgreso.getSelectedRow(), 0));
+                        tarea.setFechaDeTerminacion(LocalDateTime.now());
+                        tareaDAO.actualizarFecha(tarea);
                         this.llenarTabla();
                         break;
                     }

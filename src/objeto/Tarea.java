@@ -5,6 +5,8 @@
  */
 package objeto;
 
+import java.time.LocalDateTime;
+
 /**
  *
  * @author PC
@@ -14,6 +16,8 @@ public class Tarea {
     private int id;
     private String nombre;
     private int estado;
+    private LocalDateTime fechaDeTerminacion;
+    private int prioridad;
 
     
     public Tarea(int id, String nombre, int estado) {
@@ -22,14 +26,42 @@ public class Tarea {
         this.estado = estado;
     }
 
+    public Tarea(int id, String nombre, int estado, LocalDateTime fechaDeTerminacion, int prioridad) {
+        this.id = id;
+        this.nombre = nombre;
+        this.estado = estado;
+        this.fechaDeTerminacion = fechaDeTerminacion;
+        this.prioridad = prioridad;
+    }
+
     public Tarea(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Tarea(int id) {
+        this.id = id;
     }
 
     
     public Tarea(int id, int estado) {
         this.id = id;
         this.estado = estado;
+    }
+
+    public LocalDateTime getFechaDeTerminacion() {
+        return fechaDeTerminacion;
+    }
+
+    public void setFechaDeTerminacion(LocalDateTime fechaDeTerminacion) {
+        this.fechaDeTerminacion = fechaDeTerminacion;
+    }
+
+    public int getPrioridad() {
+        return prioridad;
+    }
+
+    public void setPrioridad(int prioridad) {
+        this.prioridad = prioridad;
     }
 
     public int getId() {
