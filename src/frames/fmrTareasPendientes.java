@@ -358,9 +358,9 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
             DefaultTableModel modeloTablaFinalizado = (DefaultTableModel) this.tablaTareasFinalizadas.getModel();
             TableRowSorter<DefaultTableModel> ordenPendiente = new TableRowSorter<DefaultTableModel>(modeloTablaPendiente);
             this.tablaTareasPendientes.setRowSorter(ordenPendiente);
-            TableRowSorter<DefaultTableModel> ordenProgreso = new TableRowSorter<DefaultTableModel>(modeloTablaPendiente);
+            TableRowSorter<DefaultTableModel> ordenProgreso = new TableRowSorter<DefaultTableModel>(modeloTablaProgreso);
             this.tablaTareasProgreso.setRowSorter(ordenProgreso);
-            TableRowSorter<DefaultTableModel> ordenFinal = new TableRowSorter<DefaultTableModel>(modeloTablaPendiente);
+            TableRowSorter<DefaultTableModel> ordenFinal = new TableRowSorter<DefaultTableModel>(modeloTablaFinalizado);
             this.tablaTareasFinalizadas.setRowSorter(ordenFinal);
             
             modeloTablaPendiente.setRowCount(0);
@@ -395,6 +395,7 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
                 
             }
 
+            
             if (modeloTablaProgreso.getRowCount() != 0) {
                 this.btn_pomodoro.setEnabled(true);
             } else {
