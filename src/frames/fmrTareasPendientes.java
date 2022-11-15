@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import objeto.Tarea;
 
 /**
@@ -355,7 +356,12 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
             DefaultTableModel modeloTablaPendiente = (DefaultTableModel) this.tablaTareasPendientes.getModel();
             DefaultTableModel modeloTablaProgreso = (DefaultTableModel) this.tablaTareasProgreso.getModel();
             DefaultTableModel modeloTablaFinalizado = (DefaultTableModel) this.tablaTareasFinalizadas.getModel();
-            
+            TableRowSorter<DefaultTableModel> ordenPendiente = new TableRowSorter<DefaultTableModel>(modeloTablaPendiente);
+            this.tablaTareasPendientes.setRowSorter(ordenPendiente);
+            TableRowSorter<DefaultTableModel> ordenProgreso = new TableRowSorter<DefaultTableModel>(modeloTablaPendiente);
+            this.tablaTareasProgreso.setRowSorter(ordenProgreso);
+            TableRowSorter<DefaultTableModel> ordenFinal = new TableRowSorter<DefaultTableModel>(modeloTablaPendiente);
+            this.tablaTareasFinalizadas.setRowSorter(ordenFinal);
             
             modeloTablaPendiente.setRowCount(0);
             modeloTablaProgreso.setRowCount(0);
