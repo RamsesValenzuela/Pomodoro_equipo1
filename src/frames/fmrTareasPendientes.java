@@ -258,7 +258,7 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
     private void btn_pomodoroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pomodoroActionPerformed
         if (validarSeleccionado()) {
             try {
-                Tarea haciendo = tareaDAO.consultarPorNombre((String) tablaTareasProgreso.getModel().getValueAt(tablaTareasProgreso.getSelectedRow(), 1));
+                Tarea haciendo = tareaDAO.consultarPorId((Integer) tablaTareasProgreso.getModel().getValueAt(tablaTareasProgreso.getSelectedRow(), 0));
                 FmrPomodoro pomodoro = new FmrPomodoro(haciendo);
                 pomodoro.setVisible(true);
                 this.dispose();

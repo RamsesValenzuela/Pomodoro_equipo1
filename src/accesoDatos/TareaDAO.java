@@ -106,7 +106,7 @@ public class TareaDAO extends DatabaseConnection implements IDAO<Tarea> {
                 int idTarea = rs.getInt("idtarea");
                 String nombre = rs.getString("nombre");
                 int estado = rs.getInt("estado");
-                LocalDateTime fechaterm = LocalDateTime.parse(rs.getString("fechaterm"));
+                LocalDateTime fechaterm = estado!=2?null:LocalDateTime.parse(rs.getString("fechaterm"));
                 int prioridad = rs.getInt("prioridad");
 
                 tarea = new Tarea(idTarea, nombre, estado, fechaterm, prioridad);
@@ -131,7 +131,7 @@ public class TareaDAO extends DatabaseConnection implements IDAO<Tarea> {
                 int idTarea = rs.getInt("idtarea");
                 String nombre = rs.getString("nombre");
                 int estado = rs.getInt("estado");
-                LocalDateTime fechaterm = LocalDateTime.parse(rs.getString("fechaterm"));
+                LocalDateTime fechaterm =estado!=2?null: LocalDateTime.parse(rs.getString("fechaterm"));
                 int prioridad = rs.getInt("prioridad");
                 tarea = new Tarea(idTarea, nombre, estado, fechaterm, prioridad);
             }
