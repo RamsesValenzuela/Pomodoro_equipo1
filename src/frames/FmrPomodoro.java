@@ -231,6 +231,7 @@ public class FmrPomodoro extends javax.swing.JFrame {
         
         if (!pausa) {
             timerBlink.cancel();
+            lbTiempo.setEnabled(true);
         }else{
             
         timerBlink=new Timer();
