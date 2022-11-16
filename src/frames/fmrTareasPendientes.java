@@ -61,6 +61,7 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         tablaTareasProgreso = new javax.swing.JTable();
         btn_pomodoro = new javax.swing.JButton();
         btn_pomodoro1 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -215,6 +216,14 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         });
         jPanel1.add(btn_pomodoro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, -1, -1));
 
+        jButton1.setText("Eliminar tarea");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 220, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -282,23 +291,61 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
     private void btn_pomodoro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pomodoro1ActionPerformed
         if (validarSeleccionado()) {
             try {
-                Tarea actualiza = tareaDAO.consultarPorId((Integer) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 0));
-                if (actualiza == null) {
-                    actualiza = tareaDAO.consultarPorId((Integer) tablaTareasProgreso.getModel().getValueAt(tablaTareasProgreso.getSelectedRow(), 0));
-                    
+                Tarea actualiza = null;
+                int id = (Integer) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 0);
+
+                if (id >= 0) {
+                    actualiza = tareaDAO.consultarPorId(id);
+                } else {
+                    id = (Integer) tablaTareasProgreso.getModel().getValueAt(tablaTareasProgreso.getSelectedRow(), 0);
+                }
+                if (id >= 0) {
+                    actualiza = tareaDAO.consultarPorId(id);
                 }
                 if (actualiza == null) {
                     JOptionPane.showMessageDialog(this, "Una tarea debe ser seleccionada primero.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-                }else{
+                } else {
                     fmrTareas tareas = new fmrTareas(actualiza);
-                tareas.setVisible(true);
-                this.dispose();
+                    tareas.setVisible(true);
+                    this.dispose();
                 }
             } catch (Exception ex) {
                 Logger.getLogger(fmrTareasPendientes.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btn_pomodoro1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (validarSeleccionado()) {
+            try {
+                Tarea elimina = null;
+                int id = (Integer) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 0);
+
+                if (id >= 0) {
+                    elimina = tareaDAO.consultarPorId(id);
+                } else {
+                    id = (Integer) tablaTareasProgreso.getModel().getValueAt(tablaTareasProgreso.getSelectedRow(), 0);
+                }
+                if (id >= 0) {
+                    elimina = tareaDAO.consultarPorId(id);
+                }
+                if (elimina == null) {
+                    JOptionPane.showMessageDialog(this, "Una tarea debe ser seleccionada primero.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    int opcion = JOptionPane.showConfirmDialog(this, "Seguro de haber terminado esta tarea?", "Confirmacion", JOptionPane.YES_NO_OPTION,
+                            JOptionPane.QUESTION_MESSAGE);
+                    if (opcion == JOptionPane.YES_OPTION) {
+                        tareaDAO.eliminar(elimina.getId());
+                        JOptionPane.showMessageDialog(this, "Tarea eliminada con exito.", "Exito!!", JOptionPane.INFORMATION_MESSAGE);
+                        llenarTabla();
+                    }
+
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(fmrTareasPendientes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     boolean rowSeleccionado = false;
     int index;
@@ -488,6 +535,7 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
     private javax.swing.JButton btn_pomodoro;
     private javax.swing.JButton btn_pomodoro1;
     private javax.swing.JButton btn_progreso;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

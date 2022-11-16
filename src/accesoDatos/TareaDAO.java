@@ -109,7 +109,17 @@ public class TareaDAO extends DatabaseConnection implements IDAO<Tarea> {
 
     @Override
     public void eliminar(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+                try {
+            
+            String codigoSQL = String.format("DELETE FROM tarea WHERE idtarea='%d'", id);
+            PreparedStatement stmtCon = con.prepareStatement(codigoSQL);
+            stmtCon.executeUpdate();
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        }
     }
 
     public Tarea consultarPorNombre(String nombreB) throws Exception {
