@@ -15,14 +15,25 @@ import objeto.Tarea;
  */
 public class fmrTareas extends javax.swing.JFrame {
 
-    
+    private Tarea tarea;
     TareaDAO tareaDao = new TareaDAO();
+
     /**
      * Creates new form fmrPrincipal
+     *
+     * @param TareaAActualizar
      */
-    public fmrTareas() {
+    public fmrTareas(Tarea TareaAActualizar) {
+
         initComponents();
-        this.setTitle("Agregar tarea");
+        if (TareaAActualizar != null) {
+            this.tarea = TareaAActualizar;
+            this.setTitle("Actualizar tarea");
+            this.txtNombre.setText(TareaAActualizar.getNombre());
+            this.btnRegistrar.setText("Actualiza");
+        } else {
+            this.setTitle("Agregar tarea");
+        }
     }
 
     /**
@@ -138,24 +149,29 @@ public class fmrTareas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        try{
+        try {
             if (txtNombre.getText().length() <= 0) {
                 JOptionPane.showMessageDialog(this, "El nombre de la tarea debe contener por lo menos un caracter.", "Aviso", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            
+
             if (txtNombre.getText().length() > 100) {
                 JOptionPane.showMessageDialog(this, "El nombre de la tarea solo puede contener un maximo de 100 caracteres.", "Aviso", JOptionPane.WARNING_MESSAGE);
                 limpiar();
                 return;
             }
-            
-            tareaDao.insertar(new Tarea(this.txtNombre.getText()));
-            JOptionPane.showMessageDialog(this, "La tarea se ha agregado de manera exitosa.", "Exito!!", JOptionPane.INFORMATION_MESSAGE);
+            if (this.tarea != null) {
+                this.tarea.setNombre(this.txtNombre.getText());
+                tareaDao.actualizarNombre(tarea);
+                JOptionPane.showMessageDialog(this, "La tarea se ha actualizado de manera exitosa.", "Exito!!", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                tareaDao.insertar(new Tarea(this.txtNombre.getText()));
+                JOptionPane.showMessageDialog(this, "La tarea se ha agregado de manera exitosa.", "Exito!!", JOptionPane.INFORMATION_MESSAGE);
+            }
             limpiar();
-            
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(this, ex,"Error",JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
@@ -163,12 +179,11 @@ public class fmrTareas extends javax.swing.JFrame {
         fmrTareasPendientes tareasPendientes = new fmrTareasPendientes();
         tareasPendientes.setVisible(true);
         this.dispose();
-        
+
     }//GEN-LAST:event_btn_verTareasActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-        if (txtNombre.getText().length() > 100) 
-        {
+        if (txtNombre.getText().length() > 100) {
             evt.consume();
         }
     }//GEN-LAST:event_txtNombreKeyTyped
@@ -180,13 +195,11 @@ public class fmrTareas extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
-    
-    
-    
-    private void limpiar(){
+
+    private void limpiar() {
         this.txtNombre.setText("");
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

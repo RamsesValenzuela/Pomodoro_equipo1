@@ -49,7 +49,24 @@ public class TareaDAO extends DatabaseConnection implements IDAO<Tarea> {
         }
 
     }
+    public void actualizarNombre(Tarea obj) throws Exception {
+        Tarea exist = consultarPorNombre(obj.getNombre());
 
+        if (exist != null && exist.getEstado() != 2) {
+            throw new Exception("El nombre de la tarea a actualizar ya existe...");
+
+        }
+        String sql = String.format("UPDATE tarea SET nombre = '%s' WHERE idtarea = %d",
+                obj.getNombre(),
+                obj.getId());
+
+        Statement statement = con.createStatement();
+
+        int registroAfectado = statement.executeUpdate(sql);
+        if (registroAfectado != 1) {
+            throw new Exception("El nombre de la tarea no ha podido ser actualizado.");
+        }
+    }
     @Override
     public void actualizar(Tarea obj) throws Exception {
         String sql = String.format("UPDATE tarea SET estado = '%d' WHERE idtarea = %d",

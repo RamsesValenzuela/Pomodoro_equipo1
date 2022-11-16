@@ -60,6 +60,7 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         tablaTareasProgreso = new javax.swing.JTable();
         btn_pomodoro = new javax.swing.JButton();
+        btn_pomodoro1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,7 +130,7 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
                 btn_agregarTareaActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_agregarTarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 220, 190, -1));
+        jPanel1.add(btn_agregarTarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 180, 190, -1));
 
         btn_finalizar.setText("Finalizar");
         btn_finalizar.addActionListener(new java.awt.event.ActionListener() {
@@ -203,7 +204,16 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
                 btn_pomodoroActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_pomodoro, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 270, -1, -1));
+        jPanel1.add(btn_pomodoro, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 260, -1, -1));
+
+        btn_pomodoro1.setText("Actualizar tarea");
+        btn_pomodoro1.setName(""); // NOI18N
+        btn_pomodoro1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_pomodoro1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_pomodoro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -238,7 +248,7 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_ArrowDownActionPerformed
 
     private void btn_agregarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarTareaActionPerformed
-        fmrTareas fmrtareas = new fmrTareas();
+        fmrTareas fmrtareas = new fmrTareas(null);
         fmrtareas.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_agregarTareaActionPerformed
@@ -269,6 +279,27 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_pomodoroActionPerformed
 
+    private void btn_pomodoro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pomodoro1ActionPerformed
+        if (validarSeleccionado()) {
+            try {
+                Tarea actualiza = tareaDAO.consultarPorId((Integer) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 0));
+                if (actualiza == null) {
+                    actualiza = tareaDAO.consultarPorId((Integer) tablaTareasProgreso.getModel().getValueAt(tablaTareasProgreso.getSelectedRow(), 0));
+                    
+                }
+                if (actualiza == null) {
+                    JOptionPane.showMessageDialog(this, "Una tarea debe ser seleccionada primero.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                    fmrTareas tareas = new fmrTareas(actualiza);
+                tareas.setVisible(true);
+                this.dispose();
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(fmrTareasPendientes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btn_pomodoro1ActionPerformed
+
     boolean rowSeleccionado = false;
     int index;
     DefaultTableModel model;
@@ -287,8 +318,8 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         }
 
         if (index > 0) {
-            Tarea tarea=new Tarea((int) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 0));
-            tarea.setPrioridad(((int) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 3))+1);
+            Tarea tarea = new Tarea((int) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 0));
+            tarea.setPrioridad(((int) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 3)) + 1);
             try {
                 tareaDAO.actualizarPrioridad(tarea);
                 llenarTabla();
@@ -314,17 +345,17 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         }
 
         if (index < model.getRowCount() - 1) {
-            Tarea tarea=new Tarea((int) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 0));
-            tarea.setPrioridad(((int) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 3))-1);
-            if (tarea.getPrioridad()<0) {
+            Tarea tarea = new Tarea((int) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 0));
+            tarea.setPrioridad(((int) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 3)) - 1);
+            if (tarea.getPrioridad() < 0) {
                 JOptionPane.showMessageDialog(this, "La prioridad no debe bajar de 0!!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-            }else{
-              try {
-                tareaDAO.actualizarPrioridad(tarea);
-                llenarTabla();
-            } catch (Exception ex) {
-                Logger.getLogger(fmrTareasPendientes.class.getName()).log(Level.SEVERE, null, ex);
-            }  
+            } else {
+                try {
+                    tareaDAO.actualizarPrioridad(tarea);
+                    llenarTabla();
+                } catch (Exception ex) {
+                    Logger.getLogger(fmrTareasPendientes.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             model.moveRow(index, index, index + 1);
             tablaTareasPendientes.setRowSelectionInterval(index + 1, index + 1);
@@ -346,10 +377,12 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         }
         return estado;
     }
-    public String parsearFecha(String fecha){
-        String parseada= (fecha.split("T")[0]+" "+fecha.split("T")[1]);
+
+    public String parsearFecha(String fecha) {
+        String parseada = (fecha.split("T")[0] + " " + fecha.split("T")[1]);
         return parseada;
     }
+
     public void llenarTabla() {
         try {
             ArrayList<Tarea> listaTareas = tareaDAO.consultar();
@@ -362,40 +395,38 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
             this.tablaTareasProgreso.setRowSorter(ordenProgreso);
             TableRowSorter<DefaultTableModel> ordenFinal = new TableRowSorter<DefaultTableModel>(modeloTablaFinalizado);
             this.tablaTareasFinalizadas.setRowSorter(ordenFinal);
-            
+
             modeloTablaPendiente.setRowCount(0);
             modeloTablaProgreso.setRowCount(0);
             modeloTablaFinalizado.setRowCount(0);
 
             for (Tarea tarea : listaTareas) {
                 Object[] filaDatos = new Object[4];
-                    
-                
+
                 filaDatos[0] = tarea.getId();
                 filaDatos[1] = tarea.getNombre();
                 filaDatos[2] = parsearEstado(tarea.getEstado());
 
                 switch (tarea.getEstado()) {
                     case 0: {
-                        filaDatos[3]=tarea.getPrioridad();
+                        filaDatos[3] = tarea.getPrioridad();
                         modeloTablaPendiente.addRow(filaDatos);
                         break;
                     }
                     case 1: {
-                        filaDatos[3]=tarea.getPrioridad();
+                        filaDatos[3] = tarea.getPrioridad();
                         modeloTablaProgreso.addRow(filaDatos);
                         break;
                     }
                     case 2: {
-                        filaDatos[3]=parsearFecha(tarea.getFechaDeTerminacion().toString());
+                        filaDatos[3] = parsearFecha(tarea.getFechaDeTerminacion().toString());
                         modeloTablaFinalizado.addRow(filaDatos);
                         break;
                     }
                 }
-                
+
             }
 
-            
             if (modeloTablaProgreso.getRowCount() != 0) {
                 this.btn_pomodoro.setEnabled(true);
             } else {
@@ -455,6 +486,7 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
     private javax.swing.JButton btn_finalizar;
     private javax.swing.JButton btn_pendiente;
     private javax.swing.JButton btn_pomodoro;
+    private javax.swing.JButton btn_pomodoro1;
     private javax.swing.JButton btn_progreso;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

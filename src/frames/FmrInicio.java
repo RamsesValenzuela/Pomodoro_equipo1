@@ -88,7 +88,7 @@ public class FmrInicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTareasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTareasActionPerformed
-       fmrTareas tarea = new fmrTareas();
+       fmrTareas tarea = new fmrTareas(null);
        tarea.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_btnTareasActionPerformed
