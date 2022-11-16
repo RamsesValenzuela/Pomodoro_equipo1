@@ -249,6 +249,21 @@ public class FmrPomodoro extends javax.swing.JFrame {
         }, 0,1000);
         }
     }
+    private void bip(){
+        timerBlink=new Timer();
+        timerBlink.schedule(new TimerTask(){
+            int counter=0;
+            @Override
+            public void run() {
+                counter++;
+                if (counter%2==0) {
+                    Toolkit.getDefaultToolkit().beep();
+                }
+                
+            }
+        }, 0,1000);
+        
+    }
     private void pomodoroTimer() {
         jLabel4.setVisible(false);
         timer = new Timer();
@@ -270,11 +285,14 @@ public class FmrPomodoro extends javax.swing.JFrame {
                         jLabel4.setText(leyendaCont + " " + (cont - counter) + " segundos para el descanso");
                     }
                     if (counter == cont) {
+                        bip();
                         int opcion = JOptionPane.showConfirmDialog(null, numPomodoro < 4 ? "Completaste un pomodoro, Quieres omitir un pequeño descanso??" : "Completaste 4 pomodoros, Quieres omitir un gran descanso??", "Descanso!!", JOptionPane.YES_NO_OPTION,
                                 JOptionPane.QUESTION_MESSAGE);
                         jLabel4.setVisible(false);
                         timer.cancel();
+                        
                         int confirm=JOptionPane.NO_OPTION;
+                        timerBlink.cancel();
                         if (opcion==JOptionPane.YES_OPTION) {
                             confirm = JOptionPane.showConfirmDialog(null, "Seguro que deseas omitir?", "Confirmacion!!", JOptionPane.YES_NO_OPTION,
                                 JOptionPane.QUESTION_MESSAGE);
@@ -326,9 +344,11 @@ public class FmrPomodoro extends javax.swing.JFrame {
                         jLabel4.setText(leyendaCont + " " + (lim - cont) + " segundos para el descanso");
                     }
                     if (cont == lim) {
+                        bip();
                         timer.cancel();
                         Toolkit.getDefaultToolkit().beep();
                         JOptionPane.showMessageDialog(null, "Descanso corto finalizado");
+                        timerBlink.cancel();
                         numPomodoro++;
                         int descansosFaltantes = 4 - numPomodoro;
                         jLabel1.setText(descansosFaltantes != 0 ? "Descansos antes del descanso largo: " + (4 - numPomodoro) : "El siguiente es un descanso largo!!");
@@ -361,9 +381,11 @@ public class FmrPomodoro extends javax.swing.JFrame {
                         jLabel4.setText(leyendaCont + " " + (counterLimit - cont) + " segundos para el descanso");
                     }
                     if (cont == counterLimit) {
+                        bip();
                         timer.cancel();
                         Toolkit.getDefaultToolkit().beep();
                         JOptionPane.showMessageDialog(null, "Es hora de continuar con las tareas.");
+                        timerBlink.cancel();
                         numPomodoro = 1;
                         jLabel1.setText("Descansos antes del descanso largo: " + (4 - numPomodoro));
                         pomodoroTimer();
