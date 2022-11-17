@@ -292,11 +292,10 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         if (validarSeleccionado()) {
             try {
                 Tarea actualiza = null;
-                int id = (Integer) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 0);
-
-                if (id >= 0) {
-                    actualiza = tareaDAO.consultarPorId(id);
-                } else {
+                int id =-1;
+                if (tablaTareasPendientes.getSelectedRow() != -1) {
+                    id= (Integer) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 0);
+                } else if (tablaTareasProgreso.getSelectedRow() != -1) {
                     id = (Integer) tablaTareasProgreso.getModel().getValueAt(tablaTareasProgreso.getSelectedRow(), 0);
                 }
                 if (id >= 0) {
@@ -319,11 +318,10 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         if (validarSeleccionado()) {
             try {
                 Tarea elimina = null;
-                int id = (Integer) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 0);
-
-                if (id >= 0) {
-                    elimina = tareaDAO.consultarPorId(id);
-                } else {
+                int id =-1;
+                if (tablaTareasPendientes.getSelectedRow() != -1) {
+                    id= (Integer) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 0);
+                } else if (tablaTareasProgreso.getSelectedRow() != -1) {
                     id = (Integer) tablaTareasProgreso.getModel().getValueAt(tablaTareasProgreso.getSelectedRow(), 0);
                 }
                 if (id >= 0) {
@@ -332,7 +330,7 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
                 if (elimina == null) {
                     JOptionPane.showMessageDialog(this, "Una tarea debe ser seleccionada primero.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    int opcion = JOptionPane.showConfirmDialog(this, "Seguro de haber terminado esta tarea?", "Confirmacion", JOptionPane.YES_NO_OPTION,
+                    int opcion = JOptionPane.showConfirmDialog(this, "Seguro de querer eliminar esta tarea?", "Confirmacion", JOptionPane.YES_NO_OPTION,
                             JOptionPane.QUESTION_MESSAGE);
                     if (opcion == JOptionPane.YES_OPTION) {
                         tareaDAO.eliminar(elimina.getId());
