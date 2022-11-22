@@ -283,7 +283,7 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
                 pomodoro.setVisible(true);
                 this.dispose();
             } catch (Exception ex) {
-                Logger.getLogger(fmrTareasPendientes.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "No se puede abrir el pomodoro en tareas finalizadas", "Error!!", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_btn_pomodoroActionPerformed
@@ -292,9 +292,9 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         if (validarSeleccionado()) {
             try {
                 Tarea actualiza = null;
-                int id =-1;
+                int id = -1;
                 if (tablaTareasPendientes.getSelectedRow() != -1) {
-                    id= (Integer) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 0);
+                    id = (Integer) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 0);
                 } else if (tablaTareasProgreso.getSelectedRow() != -1) {
                     id = (Integer) tablaTareasProgreso.getModel().getValueAt(tablaTareasProgreso.getSelectedRow(), 0);
                 }
@@ -318,9 +318,9 @@ public class fmrTareasPendientes extends javax.swing.JFrame {
         if (validarSeleccionado()) {
             try {
                 Tarea elimina = null;
-                int id =-1;
+                int id = -1;
                 if (tablaTareasPendientes.getSelectedRow() != -1) {
-                    id= (Integer) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 0);
+                    id = (Integer) tablaTareasPendientes.getModel().getValueAt(tablaTareasPendientes.getSelectedRow(), 0);
                 } else if (tablaTareasProgreso.getSelectedRow() != -1) {
                     id = (Integer) tablaTareasProgreso.getModel().getValueAt(tablaTareasProgreso.getSelectedRow(), 0);
                 }

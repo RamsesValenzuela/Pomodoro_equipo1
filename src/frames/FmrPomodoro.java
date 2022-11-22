@@ -41,6 +41,7 @@ public class FmrPomodoro extends javax.swing.JFrame {
         btnRestart.setEnabled(false);
         btnPausa.setEnabled(false);
         jLabel4.setVisible(false);
+        setLocationRelativeTo(null);
     }
 
     /**
